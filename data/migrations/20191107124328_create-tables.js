@@ -17,12 +17,16 @@ exports.up = function (knex) {
         .integer('recipe_id')
         .notNullable()
         .references('id')
-        .inTable('recipe');
+        .inTable('recipe')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
       recipe_ingredient
         .integer('ingredient_id')
         .notNullable()
         .references('id')
-        .inTable('ingredient');
+        .inTable('ingredient')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
       recipe_ingredient.float('quantity').notNullable();
     })
     .createTable('recipe_step', recipe_step => {
@@ -30,7 +34,9 @@ exports.up = function (knex) {
       recipe_step.integer('recipe_id')
         .notNullable()
         .references('id')
-        .inTable('recipe');
+        .inTable('recipe')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE');
       recipe_step.integer('stepNumber').notNullable();
       recipe_step.text('step').notNullable();
     });
