@@ -12,7 +12,7 @@ exports.up = function (knex) {
         .notNullable();
     })
     .createTable('recipe_ingredient', recipe_ingredient => {
-      recipe_ingredient.increments();
+      recipe_ingredient.primary(['recipe_id', 'ingredient_id']);
       recipe_ingredient
         .integer('recipe_id')
         .notNullable()
@@ -26,13 +26,13 @@ exports.up = function (knex) {
       recipe_ingredient.float('quantity').notNullable();
     })
     .createTable('recipe_step', recipe_step => {
-      recipe_step.increments();
-      recipe_step.text('step').notNullable();
-      recipe_step.integer('stepNumber').notNullable();
+      recipe_step.primary(['recipe_id', 'stepNumber']);
       recipe_step.integer('recipe_id')
         .notNullable()
         .references('id')
         .inTable('recipe');
+      recipe_step.integer('stepNumber').notNullable();
+      recipe_step.text('step').notNullable();
     });
 };
 
