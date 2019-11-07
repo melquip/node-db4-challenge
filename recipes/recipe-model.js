@@ -34,7 +34,7 @@ const getShoppingList = (id) => {
 }
 
 const getInstructions = (id) => {
-  return db('recipe_step').where({ 'recipe_id': id });
+  return db('recipe_step').where({ 'recipe_id': id }).orderBy('stepNumber');
 }
 
 const getRecipe = (id) => {
